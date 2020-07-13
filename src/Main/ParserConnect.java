@@ -10,10 +10,10 @@ public class ParserConnect {
         this.arrayList = arrayList;
     }
 
-    public ParserConnect(ArrayList<Book> arrayList, String errorMessage) {
-        this.arrayList = arrayList;
+    public ParserConnect(String errorMessage) {
         this.errorMessage = errorMessage;
     }
+
 
     public String getErrorMessage() {
         return errorMessage;

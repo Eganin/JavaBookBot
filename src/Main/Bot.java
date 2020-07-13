@@ -50,8 +50,15 @@ public class Bot extends TelegramLongPollingBot {
                     try {
                         // в ином случае включаем обработку парсера
                         Parser parserBook = new Parser();
-                        ArrayList<Book> books = parserBook.parser(message.getText());
-                        getInfoBooks(books, message);// отправляем информацию
+                        ParserConnect books = parserBook.parser(message.getText());
+                        String messageError = books.getErrorMessage();
+                        ArrayList<Book> booksList = books.getArrayList();
+                        if(messageError!=null){
+                            sendMsg(message,messageError);
+                        }else {
+                            getInfoBooks(booksList, message);// отправляем информацию
+                        }
+
                     } catch (Exception e) {
                         System.out.println("Произошла ошибка во время парсинга");
                     }

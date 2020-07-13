@@ -33,6 +33,7 @@ public class Parser {
         for (Element book : tableBook) {
             String name = new String(book.select("a").text().trim());
             String href = new String(firstUrl + book.attr("a[href]").trim());
+            System.out.println(book.select("a[href=true]"));
             String infoText = book.select("p").text();
 
             ArrayList<String> listBook = new ArrayList<String>();
@@ -61,9 +62,10 @@ public class Parser {
         return book;
     }
 
-    public ArrayList<Book>  parser(String bookName) {
+    public ParserConnect  parser(String bookName) {
         // логика парсера
         // set состоящий из hashmap
+
         HashSet<HashMap<String, ArrayList<String>>> setBookInfo = new HashSet<HashMap<String, ArrayList<String>>>();
         ArrayList<Book> bookList = new ArrayList<Book>();
         try {
@@ -82,8 +84,12 @@ public class Parser {
 
         } catch (IOException e) {
             System.out.println("Error to connect to website");
-            //return "Вы неправильно ввели значение попробуйте еще раз";
+            String errorMessage = new String("Вы неправильно ввели значение попробуйте еще раз");
+            ParserConnect parserConnect =  new ParserConnect(errorMessage);
+            return parserConnect;
+
         }
-        return bookList;
+        ParserConnect parserConnect =  new ParserConnect(bookList);
+        return parserConnect;
     }
 }
