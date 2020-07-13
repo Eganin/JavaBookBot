@@ -3,10 +3,14 @@ package Main;
 import java.util.ArrayList;
 
 public class Book {
-    public ArrayList<String> nameBook;
-    public ArrayList<ArrayList<String>> infoBook;
+    /*
+    Класс предназначенный для хранения результата парсинга
+     */
+    public ArrayList<String> nameBook;// имя книги
+    public ArrayList<ArrayList<String>> infoBook; // остальная информация о книге
 
     public Book(ArrayList<String> nameBook, ArrayList<ArrayList<String>> infoBook) {
+        // конcтруктор
         this.nameBook = nameBook;
         this.infoBook = infoBook;
     }

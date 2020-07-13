@@ -18,12 +18,14 @@ public class Parser {
     final String firstUrl = new String("https://codernet.ru");
 
     private Document getPage(int pageNumber, String book) throws IOException {
+        // метод который получает html-страницу
         String baseUrl = String.format("https://codernet.ru/books/%s/?page=%d", book, pageNumber);
         Document page = Jsoup.parse(new URL(baseUrl), 6000);
         return page;
     }
 
     private HashMap<String, ArrayList<String>> parsingPage(Document webpage) {
+        // метод предназначенный для парсинга данных со страницы
         HashMap<String, ArrayList<String>> dictionaryBook = new HashMap<>();
 
         Elements tableBook = webpage.select("li[class=media]");
@@ -45,11 +47,12 @@ public class Parser {
     }
 
     public Book sendingParsingResult(HashMap<String, ArrayList<String>> result) {
+        // преобразование результатов парсера
         ArrayList<String> nameBook = new ArrayList<String>();
         ArrayList<ArrayList<String>> infoBook = new ArrayList<ArrayList<String>>();
-        for (HashMap.Entry<String, ArrayList<String>> entry : result.entrySet()) {
-            String name = entry.getKey();
-            ArrayList<String> other = entry.getValue();
+        for (HashMap.Entry<String, ArrayList<String>> entry : result.entrySet()) {// обход hashmap
+            String name = entry.getKey();// получить ключ
+            ArrayList<String> other = entry.getValue();// получить значение
             nameBook.add(name);
             infoBook.add(other);
         }
@@ -59,12 +62,14 @@ public class Parser {
     }
 
     public ArrayList<Book> parser(String bookName) {
+        // логика парсера
+        // set состоящий из hashmap
         HashSet<HashMap<String, ArrayList<String>>> setBookInfo = new HashSet<HashMap<String, ArrayList<String>>>();
         ArrayList<Book> bookList = new ArrayList<Book>();
         try {
             for (int i = 1; i < 10; i++) {
-                Document page = getPage(i, bookName);
-                HashMap<String, ArrayList<String>> result = parsingPage(page);
+                Document page = getPage(i, bookName);// получаем страницу
+                HashMap<String, ArrayList<String>> result = parsingPage(page);// получаем нужные данные со страницы
                 setBookInfo.add(result);
 
             }
