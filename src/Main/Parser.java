@@ -61,7 +61,7 @@ public class Parser {
         return book;
     }
 
-    public ArrayList<Book> parser(String bookName) {
+    public ArrayList<Book>  parser(String bookName) {
         // логика парсера
         // set состоящий из hashmap
         HashSet<HashMap<String, ArrayList<String>>> setBookInfo = new HashSet<HashMap<String, ArrayList<String>>>();
@@ -82,6 +82,7 @@ public class Parser {
 
         } catch (IOException e) {
             System.out.println("Error to connect to website");
+            //return "Вы неправильно ввели значение попробуйте еще раз";
         }
         return bookList;
     }
